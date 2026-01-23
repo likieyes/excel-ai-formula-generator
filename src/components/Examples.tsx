@@ -62,11 +62,7 @@ const examples: Example[] = [
   }
 ]
 
-interface ExamplesProps {
-  onExampleClick?: (input: string, platform: 'excel' | 'google-sheets') => void
-}
-
-export default function Examples({ onExampleClick }: ExamplesProps) {
+export default function Examples() {
   return (
     <section id="examples" className="w-full py-16 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -83,8 +79,7 @@ export default function Examples({ onExampleClick }: ExamplesProps) {
           {examples.map((example) => (
             <div
               key={example.id}
-              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 p-6 cursor-pointer border border-gray-200 hover:border-excel-green"
-              onClick={() => onExampleClick?.(example.input, example.platform)}
+              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 p-6 border border-gray-200"
             >
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg font-semibold text-gray-900">
@@ -116,13 +111,6 @@ export default function Examples({ onExampleClick }: ExamplesProps) {
                   <div className="text-sm font-mono text-excel-green bg-green-50 p-2 rounded border border-green-200">
                     {example.formula}
                   </div>
-                </div>
-              </div>
-              
-              <div className="mt-4 pt-3 border-t border-gray-100">
-                <div className="flex items-center text-excel-green text-sm font-medium">
-                  <span className="mr-1">→</span>
-                  Click to try this example
                 </div>
               </div>
             </div>

@@ -313,7 +313,7 @@ export default function Home() {
         
         {/* SEO Content Sections - Lazy loaded for better performance */}
         <Suspense fallback={<SectionSkeleton />}>
-          <Examples onExampleClick={handleExampleClick} />
+          <Examples />
         </Suspense>
         
         <Suspense fallback={<SectionSkeleton />}>
