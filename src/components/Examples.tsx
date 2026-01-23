@@ -14,49 +14,49 @@ interface Example {
 const examples: Example[] = [
   {
     id: 'sum',
-    title: '求和计算',
-    description: '计算指定范围内所有数值的总和',
-    input: '计算A1到A10的总和',
+    title: 'Sum Calculation',
+    description: 'Calculate the total of all values in a specified range',
+    input: 'Calculate the sum of A1 to A10',
     formula: '=SUM(A1:A10)',
     platform: 'excel'
   },
   {
     id: 'vlookup',
-    title: '数据查找',
-    description: '从表格中查找对应的数据',
-    input: '查找产品价格表中的价格',
+    title: 'Data Lookup',
+    description: 'Find corresponding data from a table',
+    input: 'Find the price from a product price list',
     formula: '=VLOOKUP(A2,B:D,3,FALSE)',
     platform: 'excel'
   },
   {
     id: 'if',
-    title: '条件判断',
-    description: '根据条件显示不同的结果',
-    input: '如果分数大于80显示及格，否则显示不及格',
-    formula: '=IF(A1>80,"及格","不及格")',
+    title: 'Conditional Logic',
+    description: 'Display different results based on conditions',
+    input: 'If score is greater than 80 show Pass, otherwise show Fail',
+    formula: '=IF(A1>80,"Pass","Fail")',
     platform: 'excel'
   },
   {
     id: 'average',
-    title: '平均值计算',
-    description: '计算数值的平均值',
-    input: '计算学生成绩的平均分',
+    title: 'Average Calculation',
+    description: 'Calculate the average value of numbers',
+    input: 'Calculate the average of student grades',
     formula: '=AVERAGE(B2:B10)',
     platform: 'excel'
   },
   {
     id: 'countif',
-    title: '条件计数',
-    description: '统计满足条件的单元格数量',
-    input: '统计大于90分的学生人数',
+    title: 'Conditional Count',
+    description: 'Count cells that meet specific criteria',
+    input: 'Count students with scores greater than 90',
     formula: '=COUNTIF(B2:B10,">90")',
     platform: 'excel'
   },
   {
     id: 'query',
-    title: 'Google表格查询',
-    description: '使用QUERY函数进行数据筛选',
-    input: '查询销售额大于1000的记录',
+    title: 'Google Sheets Query',
+    description: 'Use QUERY function for data filtering',
+    input: 'Query records with sales greater than 1000',
     formula: '=QUERY(A:C,"SELECT * WHERE C > 1000")',
     platform: 'google-sheets'
   }
@@ -72,10 +72,10 @@ export default function Examples({ onExampleClick }: ExamplesProps) {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            公式示例
+            Formula Examples
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            点击下面的示例快速体验AI公式生成功能
+            Click the examples below to quickly experience AI formula generation
           </p>
         </div>
 
@@ -105,14 +105,14 @@ export default function Examples({ onExampleClick }: ExamplesProps) {
               
               <div className="space-y-3">
                 <div>
-                  <div className="text-xs font-medium text-gray-500 mb-1">输入描述:</div>
+                  <div className="text-xs font-medium text-gray-500 mb-1">Input Description:</div>
                   <div className="text-sm text-gray-700 bg-gray-50 p-2 rounded border">
                     {example.input}
                   </div>
                 </div>
                 
                 <div>
-                  <div className="text-xs font-medium text-gray-500 mb-1">生成公式:</div>
+                  <div className="text-xs font-medium text-gray-500 mb-1">Generated Formula:</div>
                   <div className="text-sm font-mono text-excel-green bg-green-50 p-2 rounded border border-green-200">
                     {example.formula}
                   </div>
@@ -122,7 +122,7 @@ export default function Examples({ onExampleClick }: ExamplesProps) {
               <div className="mt-4 pt-3 border-t border-gray-100">
                 <div className="flex items-center text-excel-green text-sm font-medium">
                   <span className="mr-1">→</span>
-                  点击试用此示例
+                  Click to try this example
                 </div>
               </div>
             </div>
