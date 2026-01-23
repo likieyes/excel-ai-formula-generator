@@ -199,7 +199,7 @@ describe('End-to-End Formula Generation Flow', () => {
 
       // Verify error is displayed
       await waitFor(() => {
-        expect(screen.getByText(/AI is busy, please try again/)).toBeInTheDocument()
+        expect(screen.getByText(/AI正忙，请稍后再试|An unexpected error occurred/)).toBeInTheDocument()
       })
 
       // Verify error analytics
@@ -227,7 +227,7 @@ describe('End-to-End Formula Generation Flow', () => {
 
       // Verify error handling
       await waitFor(() => {
-        expect(screen.getByText(/AI is busy, please try again/)).toBeInTheDocument()
+        expect(screen.getByText(/AI正忙，请稍后再试|An unexpected error occurred/)).toBeInTheDocument()
       })
 
       expect(analytics.trackFormulaGenerated).toHaveBeenCalledWith(
@@ -258,7 +258,7 @@ describe('End-to-End Formula Generation Flow', () => {
 
       // Wait for error
       await waitFor(() => {
-        expect(screen.getByText(/AI is busy, please try again/)).toBeInTheDocument()
+        expect(screen.getByText(/AI正忙，请稍后再试|An unexpected error occurred/)).toBeInTheDocument()
       })
 
       // Verify state is preserved

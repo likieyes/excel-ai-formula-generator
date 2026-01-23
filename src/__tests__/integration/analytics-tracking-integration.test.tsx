@@ -93,7 +93,7 @@ describe('Analytics Tracking Integration', () => {
 
       // Wait for error
       await waitFor(() => {
-        expect(screen.getByText(/AI is busy, please try again/)).toBeInTheDocument()
+        expect(screen.getByText(/AI正忙，请稍后再试|An unexpected error occurred/)).toBeInTheDocument()
       })
 
       // Verify error analytics
@@ -305,7 +305,7 @@ describe('Analytics Tracking Integration', () => {
         await user.click(screen.getByTestId('generate-button'))
 
         await waitFor(() => {
-          expect(screen.getByText(/AI is busy, please try again/)).toBeInTheDocument()
+          expect(screen.getByText(/AI正忙，请稍后再试|An unexpected error occurred/)).toBeInTheDocument()
         })
 
         expect(analytics.trackFormulaGenerated).toHaveBeenCalledWith(
@@ -327,7 +327,7 @@ describe('Analytics Tracking Integration', () => {
       await user.click(screen.getByTestId('generate-button'))
 
       await waitFor(() => {
-        expect(screen.getByText(/AI is busy, please try again/)).toBeInTheDocument()
+        expect(screen.getByText(/AI正忙，请稍后再试|An unexpected error occurred/)).toBeInTheDocument()
       })
 
       expect(analytics.trackFormulaGenerated).toHaveBeenCalledWith(

@@ -358,7 +358,7 @@ describe('Cross-Platform Formula Generation', () => {
       await user.click(screen.getByTestId('generate-button'))
 
       await waitFor(() => {
-        expect(screen.getByText(/AI is busy, please try again/)).toBeInTheDocument()
+        expect(screen.getByText(/AI正忙，请稍后再试|An unexpected error occurred/)).toBeInTheDocument()
       })
     })
 
@@ -378,7 +378,7 @@ describe('Cross-Platform Formula Generation', () => {
       await user.click(screen.getByTestId('generate-button'))
 
       await waitFor(() => {
-        expect(screen.getByText(/AI is busy, please try again/)).toBeInTheDocument()
+        expect(screen.getByText(/AI正忙，请稍后再试|An unexpected error occurred/)).toBeInTheDocument()
       })
     })
   })

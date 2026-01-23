@@ -6,11 +6,10 @@
 import * as fc from 'fast-check'
 import { GenerateFormulaRequest, GenerateFormulaResponse } from '@/types'
 
-// Mock the OpenAI API for testing
-jest.mock('openai', () => {
+// Mock the ZhipuAI API for testing
+jest.mock('zhipuai', () => {
   return {
-    __esModule: true,
-    default: jest.fn().mockImplementation(() => ({
+    ZhipuAI: jest.fn().mockImplementation(() => ({
       chat: {
         completions: {
           create: jest.fn().mockResolvedValue({
@@ -30,7 +29,7 @@ jest.mock('openai', () => {
 })
 
 // Mock environment variable
-process.env.OPENAI_API_KEY = 'test-api-key'
+process.env.ZHIPU_API_KEY = 'test-api-key'
 
 describe('Natural Language Conversion Property Tests', () => {
   /**
@@ -153,7 +152,7 @@ describe('Natural Language Conversion Property Tests', () => {
                 }),
                 fc.constant({
                   success: false,
-                  error: 'AI is busy, please try again'
+                  error: 'AI正忙，请稍后再试'
                 })
               ),
               1

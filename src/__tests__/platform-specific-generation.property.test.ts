@@ -6,11 +6,10 @@
 import * as fc from 'fast-check'
 import { GenerateFormulaRequest, GenerateFormulaResponse, Platform } from '@/types'
 
-// Mock the OpenAI API for testing with platform-specific responses
-jest.mock('openai', () => {
+// Mock the ZhipuAI API for testing with platform-specific responses
+jest.mock('zhipuai', () => {
   return {
-    __esModule: true,
-    default: jest.fn().mockImplementation(() => ({
+    ZhipuAI: jest.fn().mockImplementation(() => ({
       chat: {
         completions: {
           create: jest.fn().mockImplementation(({ messages }) => {
@@ -18,8 +17,8 @@ jest.mock('openai', () => {
             const userInput = messages[1].content
             
             // Determine platform from system prompt
-            const isExcel = systemPrompt.includes('Excel-specific syntax')
-            const isGoogleSheets = systemPrompt.includes('Google Sheets-specific syntax')
+            const isExcel = systemPrompt.includes('Excel特定语法') || systemPrompt.includes('VLOOKUP')
+            const isGoogleSheets = systemPrompt.includes('Google表格特定语法') || systemPrompt.includes('QUERY')
             
             let formula: string
             let explanation: string
@@ -78,7 +77,7 @@ jest.mock('openai', () => {
 })
 
 // Mock environment variable
-process.env.OPENAI_API_KEY = 'test-api-key'
+process.env.ZHIPU_API_KEY = 'test-api-key'
 
 // Create a simplified version of the API logic for testing
 async function generateFormula(request: GenerateFormulaRequest): Promise<GenerateFormulaResponse> {
@@ -104,9 +103,9 @@ async function generateFormula(request: GenerateFormulaRequest): Promise<Generat
     }
   }
 
-  // Mock OpenAI call with platform-specific responses
-  const OpenAI = require('openai').default
-  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  // Mock ZhipuAI call with platform-specific responses
+  const { ZhipuAI } = require('zhipuai')
+  const zhipu = new ZhipuAI({ apiKey: process.env.ZHIPU_API_KEY })
   
   const systemPrompts = {
     excel: 'Excel-specific syntax (e.g., VLOOKUP, INDEX/MATCH, SUMIF)',
@@ -114,8 +113,8 @@ async function generateFormula(request: GenerateFormulaRequest): Promise<Generat
   }
 
   try {
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+    const completion = await zhipu.chat.completions.create({
+      model: 'glm-4-flash',
       messages: [
         { role: 'system', content: systemPrompts[request.platform] },
         { role: 'user', content: request.input }

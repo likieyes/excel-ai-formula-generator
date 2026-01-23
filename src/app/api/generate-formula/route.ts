@@ -1,37 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server'
-import OpenAI from 'openai'
 import { GenerateFormulaRequest, GenerateFormulaResponse, AIResponse } from '@/types'
-
-// Initialize OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || 'dummy-key-for-build',
-})
 
 // System prompts for different platforms
 const SYSTEM_PROMPTS = {
-  excel: `You are an expert Excel formula generator. Convert natural language descriptions into valid Excel formulas.
+  excel: `你是一个专业的Excel公式生成专家。将自然语言描述转换为有效的Excel公式。
 
-Rules:
-1. Return ONLY valid JSON with "formula" and "explanation" fields
-2. Use Excel-specific syntax (e.g., VLOOKUP, INDEX/MATCH, SUMIF)
-3. Formula should start with = sign
-4. Explanation should be beginner-friendly and under 200 characters
-5. If the request is not spreadsheet-related, return an error in the explanation field
+规则:
+1. 只返回包含"formula"和"explanation"字段的有效JSON
+2. 使用Excel特定语法 (如 VLOOKUP, INDEX/MATCH, SUMIF)
+3. 公式必须以=号开头
+4. 解释应该简单易懂，不超过200个字符
+5. 如果请求与电子表格无关，在explanation字段返回错误信息
 
-Example response:
-{"formula": "=VLOOKUP(A2,B:D,3,FALSE)", "explanation": "Looks up the value in A2 within columns B to D and returns the value from the 3rd column"}`,
+示例响应:
+{"formula": "=VLOOKUP(A2,B:D,3,FALSE)", "explanation": "在B到D列范围内查找A2的值，返回第3列对应的值"}`,
 
-  'google-sheets': `You are an expert Google Sheets formula generator. Convert natural language descriptions into valid Google Sheets formulas.
+  'google-sheets': `你是一个专业的Google表格公式生成专家。将自然语言描述转换为有效的Google表格公式。
 
-Rules:
-1. Return ONLY valid JSON with "formula" and "explanation" fields
-2. Use Google Sheets-specific syntax (e.g., QUERY, ARRAYFORMULA, FILTER)
-3. Formula should start with = sign
-4. Explanation should be beginner-friendly and under 200 characters
-5. If the request is not spreadsheet-related, return an error in the explanation field
+规则:
+1. 只返回包含"formula"和"explanation"字段的有效JSON
+2. 使用Google表格特定语法 (如 QUERY, ARRAYFORMULA, FILTER)
+3. 公式必须以=号开头
+4. 解释应该简单易懂，不超过200个字符
+5. 如果请求与电子表格无关，在explanation字段返回错误信息
 
-Example response:
-{"formula": "=QUERY(A:C,\"SELECT A,B,C WHERE B > 100\")", "explanation": "Queries data in columns A to C and returns rows where column B is greater than 100"}`
+示例响应:
+{"formula": "=QUERY(A:C,\"SELECT A,B,C WHERE B > 100\")", "explanation": "查询A到C列的数据，返回B列大于100的所有行"}`
 }
 
 export async function POST(request: NextRequest) {
@@ -61,20 +55,18 @@ export async function POST(request: NextRequest) {
       } as GenerateFormulaResponse, { status: 400 })
     }
 
-    // Check for OpenAI API key
-    if (!process.env.OPENAI_API_KEY) {
+    // Check for ZhipuAI API key
+    if (!process.env.ZHIPU_API_KEY) {
       return NextResponse.json({
         success: false,
         error: 'AI service is temporarily unavailable'
       } as GenerateFormulaResponse, { status: 503 })
     }
 
-    const startTime = Date.now()
-
     try {
-      // Generate formula using OpenAI
-      const completion = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
+      // Generate formula using ZhipuAI OpenAI-compatible API
+      const requestBody = {
+        model: process.env.ZHIPU_MODEL || 'glm-4-flash',
         messages: [
           {
             role: 'system',
@@ -86,22 +78,64 @@ export async function POST(request: NextRequest) {
           }
         ],
         max_tokens: 500,
-        temperature: 0.1, // Low temperature for consistent results
-        response_format: { type: 'json_object' }
+        temperature: 0.1,
+      }
+
+      const response = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.ZHIPU_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
       })
 
-      const processingTime = Date.now() - startTime
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}))
+        console.error('ZhipuAI API error:', response.status, errorData)
+        
+        if (response.status === 429) {
+          return NextResponse.json({
+            success: false,
+            error: 'AI正忙，请稍后再试'
+          } as GenerateFormulaResponse, { status: 429 })
+        }
+
+        if (response.status === 401) {
+          return NextResponse.json({
+            success: false,
+            error: 'AI服务暂时不可用'
+          } as GenerateFormulaResponse, { status: 503 })
+        }
+
+        return NextResponse.json({
+          success: false,
+          error: 'AI正忙，请稍后再试'
+        } as GenerateFormulaResponse, { status: 503 })
+      }
+
+      const completion = await response.json()
 
       // Parse AI response
-      const aiResponseText = completion.choices[0]?.message?.content
+      const aiResponseText = completion.choices?.[0]?.message?.content
       if (!aiResponseText) {
         throw new Error('Empty response from AI service')
       }
 
       let aiResponse: AIResponse
       try {
-        aiResponse = JSON.parse(aiResponseText)
+        // Extract JSON from markdown code blocks if present
+        let jsonText = aiResponseText.trim()
+        if (jsonText.startsWith('```json') && jsonText.endsWith('```')) {
+          jsonText = jsonText.slice(7, -3).trim()
+        } else if (jsonText.startsWith('```') && jsonText.endsWith('```')) {
+          jsonText = jsonText.slice(3, -3).trim()
+        }
+        
+        aiResponse = JSON.parse(jsonText)
       } catch (parseError) {
+        console.error('JSON parse error:', parseError)
+        console.error('Response text:', aiResponseText)
         throw new Error('Invalid JSON response from AI service')
       }
 
@@ -121,7 +155,9 @@ export async function POST(request: NextRequest) {
       // Check if the response indicates an error (non-spreadsheet request)
       if (aiResponse.explanation.toLowerCase().includes('error') || 
           aiResponse.explanation.toLowerCase().includes('not spreadsheet') ||
-          aiResponse.explanation.toLowerCase().includes('cannot generate')) {
+          aiResponse.explanation.toLowerCase().includes('cannot generate') ||
+          aiResponse.explanation.includes('错误') ||
+          aiResponse.explanation.includes('无法生成')) {
         return NextResponse.json({
           success: false,
           error: aiResponse.explanation
@@ -137,27 +173,27 @@ export async function POST(request: NextRequest) {
         }
       } as GenerateFormulaResponse)
 
-    } catch (openaiError: any) {
-      console.error('OpenAI API error:', openaiError)
+    } catch (zhipuError: any) {
+      console.error('ZhipuAI API error:', zhipuError)
       
-      // Handle specific OpenAI errors
-      if (openaiError.status === 429) {
+      // Handle specific ZhipuAI errors
+      if (zhipuError.status === 429) {
         return NextResponse.json({
           success: false,
-          error: 'AI is busy, please try again in a moment'
+          error: 'AI正忙，请稍后再试'
         } as GenerateFormulaResponse, { status: 429 })
       }
 
-      if (openaiError.status === 401) {
+      if (zhipuError.status === 401) {
         return NextResponse.json({
           success: false,
-          error: 'AI service is temporarily unavailable'
+          error: 'AI服务暂时不可用'
         } as GenerateFormulaResponse, { status: 503 })
       }
 
       return NextResponse.json({
         success: false,
-        error: 'AI is busy, please try again'
+        error: 'AI正忙，请稍后再试'
       } as GenerateFormulaResponse, { status: 503 })
     }
 
