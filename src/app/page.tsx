@@ -27,6 +27,8 @@ import {
 // Lazy load non-critical components for better performance
 const FeatureGrid = lazy(() => import('@/components/FeatureGrid'))
 const FAQ = lazy(() => import('@/components/FAQ'))
+const Examples = lazy(() => import('@/components/Examples'))
+const Footer = lazy(() => import('@/components/Footer'))
 
 // Loading component for lazy-loaded sections
 function SectionSkeleton() {
@@ -229,6 +231,23 @@ export default function Home() {
     setError(null)
   }
 
+  const handleExampleClick = (input: string, platform: Platform) => {
+    // Scroll to the generator section
+    const generatorElement = document.querySelector('#formula-generator')
+    if (generatorElement) {
+      generatorElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+    
+    // Set the input and platform, then generate
+    setInputText(input)
+    setSelectedPlatform(platform)
+    
+    // Small delay to allow UI to update before generating
+    setTimeout(() => {
+      handleGenerate(input, platform)
+    }, 500)
+  }
+
   const handleComponentError = (error: Error, errorInfo: React.ErrorInfo) => {
     const appError = createAppError(
       'ai_service_error',
@@ -294,11 +313,20 @@ export default function Home() {
         
         {/* SEO Content Sections - Lazy loaded for better performance */}
         <Suspense fallback={<SectionSkeleton />}>
+          <Examples onExampleClick={handleExampleClick} />
+        </Suspense>
+        
+        <Suspense fallback={<SectionSkeleton />}>
           <FeatureGrid />
         </Suspense>
         
         <Suspense fallback={<SectionSkeleton />}>
           <FAQ />
+        </Suspense>
+        
+        {/* Footer */}
+        <Suspense fallback={<SectionSkeleton />}>
+          <Footer />
         </Suspense>
       </main>
     </ErrorBoundary>

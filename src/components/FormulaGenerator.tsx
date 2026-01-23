@@ -111,7 +111,7 @@ function FormulaGenerator({ onGenerate, isLoading }: FormulaGeneratorProps) {
   const isGenerateDisabled = !inputText.trim() || isLoading
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg border border-gray-200 p-6">
+    <div id="formula-generator" className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg border border-gray-200 p-6">
       {/* Platform Selector Tabs */}
       <div className="mb-6">
         <div className="flex border-b border-gray-200" role="tablist">
