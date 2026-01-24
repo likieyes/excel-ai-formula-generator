@@ -40,7 +40,7 @@ export default function TestGA() {
             <div>
               <strong>Measurement ID:</strong> 
               <code className="ml-2 bg-gray-100 px-2 py-1 rounded">
-                {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '未配置'}
+                G-F4PGJV6XDF
               </code>
             </div>
             

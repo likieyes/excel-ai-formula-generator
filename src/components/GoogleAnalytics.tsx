@@ -1,28 +1,16 @@
 'use client'
 
 import Script from 'next/script'
-import { useEffect } from 'react'
-import { initGA, GA_MEASUREMENT_ID } from '@/lib/gtag'
 
 /**
  * Google Analytics 4 component for Excel AI Formula Generator
  * Handles GA4 script loading and initialization
  */
 export default function GoogleAnalytics() {
-  useEffect(() => {
-    if (GA_MEASUREMENT_ID) {
-      initGA(GA_MEASUREMENT_ID)
-    }
-  }, [])
-
-  // Don't render if no measurement ID
-  if (!GA_MEASUREMENT_ID) {
-    console.warn('GA4: No measurement ID found')
-    return null
-  }
+  const GA_MEASUREMENT_ID = 'G-F4PGJV6XDF'
 
   // Log for debugging
-  console.log('GA4: Loading with ID:', GA_MEASUREMENT_ID)
+  console.log('GA4: Component loading with ID:', GA_MEASUREMENT_ID)
 
   return (
     <>
@@ -30,12 +18,16 @@ export default function GoogleAnalytics() {
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        onLoad={() => console.log('GA4: Script loaded successfully')}
+        onError={() => console.error('GA4: Script failed to load')}
       />
       <Script
         id="google-analytics"
         strategy="afterInteractive"
+        onLoad={() => console.log('GA4: Configuration script loaded')}
         dangerouslySetInnerHTML={{
           __html: `
+            console.log('GA4: Initializing with ID: ${GA_MEASUREMENT_ID}');
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -47,6 +39,7 @@ export default function GoogleAnalytics() {
               allow_google_signals: false,
               allow_ad_personalization_signals: false
             });
+            console.log('GA4: Configuration complete');
           `,
         }}
       />

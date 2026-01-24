@@ -3,8 +3,8 @@
  * Provides comprehensive user behavior tracking and conversion analytics
  */
 
-// Google Analytics Measurement ID - will be set via environment variable
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-F4PGJV6XDF'
+// Google Analytics Measurement ID - hardcoded for immediate testing
+export const GA_MEASUREMENT_ID = 'G-F4PGJV6XDF'
 
 // Declare gtag function for TypeScript
 declare global {
