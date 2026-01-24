@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://excelformula.ai/sitemap.xml',
+    sitemap: 'https://aiexcelformula.com/sitemap.xml',
   }
 }
