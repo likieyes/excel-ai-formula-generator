@@ -15,10 +15,14 @@ export default function GoogleAnalytics() {
     }
   }, [])
 
-  // Don't render in development or if no measurement ID
-  if (process.env.NODE_ENV === 'development' || !GA_MEASUREMENT_ID) {
+  // Don't render if no measurement ID
+  if (!GA_MEASUREMENT_ID) {
+    console.warn('GA4: No measurement ID found')
     return null
   }
+
+  // Log for debugging
+  console.log('GA4: Loading with ID:', GA_MEASUREMENT_ID)
 
   return (
     <>
