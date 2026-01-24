@@ -4,10 +4,18 @@ import {
   AnalyticsEventProperties, 
   Platform 
 } from '@/types'
+import { 
+  trackFormulaGeneration as gaTrackFormulaGeneration,
+  trackFormulaCopy as gaTrackFormulaCopy,
+  trackPlatformSwitch as gaTrackPlatformSwitch,
+  trackConversion as gaTrackConversion,
+  trackEngagement as gaTrackEngagement,
+  trackError as gaTrackError
+} from '@/lib/gtag'
 
 /**
  * Analytics tracking system for Excel AI Formula Generator
- * Integrates with Vercel Analytics for user interaction tracking
+ * Integrates with both Vercel Analytics and Google Analytics 4 for comprehensive user interaction tracking
  */
 
 /**
@@ -34,7 +42,16 @@ export function trackFormulaGenerated(
   }
 
   try {
+    // Track in Vercel Analytics
     track('formula_generated', properties)
+    
+    // Track in Google Analytics 4
+    gaTrackFormulaGeneration(
+      platform,
+      success,
+      inputLength,
+      processingTime
+    )
   } catch (error) {
     // Fail silently to not affect user experience
     console.warn('Analytics tracking failed for formula_generated:', error)
@@ -57,7 +74,11 @@ export function trackFormulaCopied(
   }
 
   try {
+    // Track in Vercel Analytics
     track('copy_formula', properties)
+    
+    // Track in Google Analytics 4
+    gaTrackFormulaCopy(platform)
   } catch (error) {
     // Fail silently to not affect user experience
     console.warn('Analytics tracking failed for copy_formula:', error)
@@ -86,7 +107,11 @@ export function trackPlatformToggle(
   }
 
   try {
+    // Track in Vercel Analytics
     track('platform_toggle', customProperties)
+    
+    // Track in Google Analytics 4
+    gaTrackPlatformSwitch(fromPlatform, toPlatform)
   } catch (error) {
     // Fail silently to not affect user experience
     console.warn('Analytics tracking failed for platform_toggle:', error)
@@ -143,12 +168,16 @@ export function trackConversion(
   metadata?: Record<string, any>
 ): void {
   try {
+    // Track in Vercel Analytics
     track('conversion', {
       conversion_type: conversionType,
       ...(value && { value }),
       timestamp: new Date().toISOString(),
       ...metadata
     })
+    
+    // Track in Google Analytics 4
+    gaTrackConversion(conversionType, value)
   } catch (error) {
     // Fail silently to not affect user experience
     console.warn('Analytics tracking failed for conversion:', error)
