@@ -39,7 +39,7 @@ describe('StructuredData Component', () => {
     
     // Check required fields
     expect(schemaContent.description).toContain('The best free AI tool to write Excel formulas')
-    expect(schemaContent.url).toBe('https://excelformula.ai')
+    expect(schemaContent.url).toBe('https://www.aiexcelformula.com')
     expect(schemaContent.operatingSystem).toBe('Web Browser')
     
     // Check offers structure
@@ -93,8 +93,8 @@ describe('StructuredData Component', () => {
     
     expect(schemaContent['@context']).toBe('https://schema.org')
     expect(schemaContent['@type']).toBe('Organization')
-    expect(schemaContent.name).toBe('ExcelFormula.AI')
-    expect(schemaContent.url).toBe('https://excelformula.ai')
+    expect(schemaContent.name).toBe('AI Excel Formula')
+    expect(schemaContent.url).toBe('https://www.aiexcelformula.com')
   })
 
   it('renders website schema with search action', () => {
@@ -110,7 +110,7 @@ describe('StructuredData Component', () => {
     // Check search action
     expect(schemaContent.potentialAction).toEqual({
       '@type': 'SearchAction',
-      target: 'https://excelformula.ai/?q={search_term_string}',
+      target: 'https://www.aiexcelformula.com/?q={search_term_string}',
       'query-input': 'required name=search_term_string'
     })
   })

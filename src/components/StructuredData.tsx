@@ -5,9 +5,9 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Excel AI Formula Generator",
-    "alternateName": "ExcelFormula.AI",
+    "alternateName": "AI Excel Formula",
     "description": "The best free AI tool to write Excel formulas. Convert English to Excel formulas, VLOOKUP, IF functions, and Google Sheets scripts instantly.",
-    "url": "https://excelformula.ai",
+    "url": "https://www.aiexcelformula.com",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web Browser",
     "browserRequirements": "Requires JavaScript. Requires HTML5.",
@@ -23,13 +23,13 @@ export default function StructuredData() {
     },
     "creator": {
       "@type": "Organization",
-      "name": "ExcelFormula.AI",
-      "url": "https://excelformula.ai"
+      "name": "AI Excel Formula",
+      "url": "https://www.aiexcelformula.com"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "ExcelFormula.AI",
-      "url": "https://excelformula.ai"
+      "name": "AI Excel Formula",
+      "url": "https://www.aiexcelformula.com"
     },
     "softwareVersion": "1.0",
     "datePublished": "2024-01-01",
@@ -55,7 +55,7 @@ export default function StructuredData() {
       "SUMIF and COUNTIF functions",
       "Array formula support"
     ],
-    "screenshot": "https://excelformula.ai/screenshot.png",
+    "screenshot": "https://www.aiexcelformula.com/screenshot.png",
     "softwareHelp": {
       "@type": "CreativeWork",
       "name": "How to use Excel AI Formula Generator",
@@ -64,7 +64,7 @@ export default function StructuredData() {
     "keywords": "excel formula generator, ai excel formulas, vlookup generator, if function generator, google sheets formula, excel ai, free formula generator, spreadsheet formulas",
     "inLanguage": "en-US",
     "copyrightYear": "2024",
-    "license": "https://excelformula.ai/terms"
+    "license": "https://www.aiexcelformula.com/terms"
   }
 
   const faqStructuredData = {
@@ -125,13 +125,13 @@ export default function StructuredData() {
   const organizationData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "ExcelFormula.AI",
-    "url": "https://excelformula.ai",
-    "logo": "https://excelformula.ai/logo.png",
+    "name": "AI Excel Formula",
+    "url": "https://www.aiexcelformula.com",
+    "logo": "https://www.aiexcelformula.com/logo.png",
     "description": "The best free AI tool to write Excel formulas and Google Sheets scripts instantly.",
     "foundingDate": "2024",
     "sameAs": [
-      "https://twitter.com/excelformulaai"
+      "https://twitter.com/aiexcelformula"
     ]
   }
 
@@ -139,12 +139,12 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Excel AI Formula Generator",
-    "url": "https://excelformula.ai",
+    "url": "https://www.aiexcelformula.com",
     "description": "The best free AI tool to write Excel formulas. Convert English to Excel formulas, VLOOKUP, IF functions, and Google Sheets scripts instantly.",
     "inLanguage": "en-US",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://excelformula.ai/?q={search_term_string}",
+      "target": "https://www.aiexcelformula.com/?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   }

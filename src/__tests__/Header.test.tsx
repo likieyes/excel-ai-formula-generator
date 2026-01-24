@@ -5,7 +5,7 @@ describe('Header Component', () => {
   it('renders the brand name correctly', () => {
     render(<Header />)
     
-    expect(screen.getByText('ExcelFormula.AI')).toBeInTheDocument()
+    expect(screen.getByText('AI Excel Formula')).toBeInTheDocument()
   })
 
   it('displays the AI logo icon', () => {

@@ -32,13 +32,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Free Excel AI Formula Generator - No Signup (Instant)',
     description: 'The best free AI tool to write Excel formulas. Convert English to Excel formulas, VLOOKUP, IF functions, and Google Sheets scripts instantly.',
-    url: 'https://aiexcelformula.com',
+    url: 'https://www.aiexcelformula.com',
     siteName: 'AI Excel Formula',
     type: 'website',
     locale: 'en_US',
     images: [
       {
-        url: 'https://aiexcelformula.com/og-image.png',
+        url: 'https://www.aiexcelformula.com/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Excel AI Formula Generator - Free Tool',
@@ -50,15 +50,15 @@ export const metadata: Metadata = {
     title: 'Free Excel AI Formula Generator - No Signup (Instant)',
     description: 'The best free AI tool to write Excel formulas. Convert English to Excel formulas, VLOOKUP, IF functions, and Google Sheets scripts instantly.',
     creator: '@aiexcelformula',
-    images: ['https://aiexcelformula.com/og-image.png'],
+    images: ['https://www.aiexcelformula.com/og-image.png'],
   },
   alternates: {
-    canonical: 'https://aiexcelformula.com',
+    canonical: 'https://www.aiexcelformula.com',
   },
   category: 'Business Tools',
   classification: 'Business Application',
   other: {
-    'google-site-verification': 'your-google-verification-code',
+    'google-site-verification': 'bxK02cKDc_T8P7zHbjBKPDXzyph0hVTOSpJk',
   },
 }
 

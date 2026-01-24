@@ -45,8 +45,8 @@ describe('SEO Metadata Configuration', () => {
     expect(metadata.openGraph?.description).toBe(
       'The best free AI tool to write Excel formulas. Convert English to Excel formulas, VLOOKUP, IF functions, and Google Sheets scripts instantly.'
     )
-    expect(metadata.openGraph?.url).toBe('https://excelformula.ai')
-    expect(metadata.openGraph?.siteName).toBe('ExcelFormula.AI')
+    expect(metadata.openGraph?.url).toBe('https://www.aiexcelformula.com')
+    expect(metadata.openGraph?.siteName).toBe('AI Excel Formula')
     expect(metadata.openGraph?.type).toBe('website')
     expect(metadata.openGraph?.locale).toBe('en_US')
   })
@@ -58,11 +58,11 @@ describe('SEO Metadata Configuration', () => {
     expect(metadata.twitter?.description).toBe(
       'The best free AI tool to write Excel formulas. Convert English to Excel formulas, VLOOKUP, IF functions, and Google Sheets scripts instantly.'
     )
-    expect(metadata.twitter?.creator).toBe('@excelformulaai')
+    expect(metadata.twitter?.creator).toBe('@aiexcelformula')
   })
 
   it('includes proper canonical URL', () => {
-    expect(metadata.alternates?.canonical).toBe('https://excelformula.ai')
+    expect(metadata.alternates?.canonical).toBe('https://www.aiexcelformula.com')
   })
 
   it('has proper robots directive', () => {
@@ -70,20 +70,20 @@ describe('SEO Metadata Configuration', () => {
   })
 
   it('includes proper author and publisher information', () => {
-    expect(metadata.authors).toEqual([{ name: 'ExcelFormula.AI' }])
-    expect(metadata.creator).toBe('ExcelFormula.AI')
-    expect(metadata.publisher).toBe('ExcelFormula.AI')
+    expect(metadata.authors).toEqual([{ name: 'AI Excel Formula' }])
+    expect(metadata.creator).toBe('AI Excel Formula')
+    expect(metadata.publisher).toBe('AI Excel Formula')
   })
 
   it('includes proper Open Graph and Twitter metadata', () => {
     expect(metadata.openGraph?.title).toBe('Free Excel AI Formula Generator - No Signup (Instant)')
     expect(metadata.openGraph?.description).toContain('The best free AI tool to write Excel formulas')
     expect(metadata.openGraph?.type).toBe('website')
-    expect(metadata.openGraph?.siteName).toBe('ExcelFormula.AI')
+    expect(metadata.openGraph?.siteName).toBe('AI Excel Formula')
     
     expect(metadata.twitter?.card).toBe('summary_large_image')
     expect(metadata.twitter?.title).toBe('Free Excel AI Formula Generator - No Signup (Instant)')
-    expect(metadata.twitter?.creator).toBe('@excelformulaai')
+    expect(metadata.twitter?.creator).toBe('@aiexcelformula')
   })
 
   it('includes proper category classification', () => {
@@ -98,7 +98,7 @@ describe('SEO Metadata Configuration', () => {
     const images = metadata.openGraph?.images as any[]
     expect(images.length).toBeGreaterThan(0)
     expect(images[0]).toEqual({
-      url: 'https://excelformula.ai/og-image.png',
+      url: 'https://www.aiexcelformula.com/og-image.png',
       width: 1200,
       height: 630,
       alt: 'Excel AI Formula Generator - Free Tool'
@@ -110,7 +110,7 @@ describe('SEO Metadata Configuration', () => {
     expect(Array.isArray(metadata.twitter?.images)).toBe(true)
     
     const images = metadata.twitter?.images as string[]
-    expect(images).toContain('https://excelformula.ai/og-image.png')
+    expect(images).toContain('https://www.aiexcelformula.com/og-image.png')
   })
 })
 

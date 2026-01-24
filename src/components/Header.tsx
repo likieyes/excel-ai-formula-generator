@@ -11,7 +11,7 @@ export default function Header() {
               <span className="text-white font-bold text-sm">AI</span>
             </div>
             <h1 className="text-xl font-bold text-gray-900">
-              ExcelFormula.AI
+              AI Excel Formula
             </h1>
           </div>
 

@@ -13,7 +13,7 @@ export default function Footer() {
               <div className="w-8 h-8 bg-excel-green rounded-md flex items-center justify-center">
                 <span className="text-white font-bold text-sm">AI</span>
               </div>
-              <h3 className="text-xl font-bold">ExcelFormula.AI</h3>
+              <h3 className="text-xl font-bold">AI Excel Formula</h3>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               Free AI-powered Excel formula generator that makes complex spreadsheet operations simple. Supports Excel and Google Sheets.
@@ -118,7 +118,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-gray-400">
-              © {currentYear} ExcelFormula.AI. All rights reserved.
+              © {currentYear} AI Excel Formula. All rights reserved.
             </div>
             
             <div className="flex items-center space-x-6 text-sm text-gray-400">
