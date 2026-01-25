@@ -79,7 +79,7 @@ export default function GATest() {
           </div>
           
           <div className="mt-4 text-sm text-gray-600">
-            <p>如果 gtag 函数显示"未加载"，请：</p>
+            <p>如果 gtag 函数显示&quot;未加载&quot;，请：</p>
             <ol className="list-decimal list-inside mt-2 space-y-1">
               <li>等待 3-5 秒让脚本加载</li>
               <li>刷新页面</li>
@@ -102,7 +102,6 @@ export default function GATest() {
 // 声明全局类型
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void
     dataLayer: any[]
   }
 }
