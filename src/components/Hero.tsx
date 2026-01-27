@@ -32,9 +32,12 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Call to action hint */}
+        {/* Call to action hint with urgency */}
         <div className="text-gray-500 text-lg">
           <p>Describe what you want to calculate in plain English below ↓</p>
+          <p className="text-sm mt-2 text-excel-green font-medium">
+            ✨ Try it now - No signup required, get results in seconds!
+          </p>
         </div>
       </div>
     </section>

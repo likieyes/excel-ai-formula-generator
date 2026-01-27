@@ -62,7 +62,17 @@ const examples: Example[] = [
   }
 ]
 
-export default function Examples() {
+interface ExamplesProps {
+  onExampleClick?: (input: string, platform: 'excel' | 'google-sheets') => void
+}
+
+export default function Examples({ onExampleClick }: ExamplesProps) {
+  const handleExampleClick = (example: Example) => {
+    if (onExampleClick) {
+      onExampleClick(example.input, example.platform)
+    }
+  }
+
   return (
     <section id="examples" className="w-full py-16 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -71,7 +81,7 @@ export default function Examples() {
             Formula Examples
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Click the examples below to quickly experience AI formula generation
+            Click any example below to try it instantly with AI generation
           </p>
         </div>
 
@@ -79,19 +89,23 @@ export default function Examples() {
           {examples.map((example) => (
             <div
               key={example.id}
-              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 p-6 border border-gray-200"
+              onClick={() => handleExampleClick(example)}
+              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 p-6 border border-gray-200 cursor-pointer hover:border-excel-green hover:scale-105 transform"
             >
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg font-semibold text-gray-900">
                   {example.title}
                 </h3>
-                <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                  example.platform === 'excel' 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-blue-100 text-blue-800'
-                }`}>
-                  {example.platform === 'excel' ? 'Excel' : 'Google Sheets'}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                    example.platform === 'excel' 
+                      ? 'bg-green-100 text-green-800' 
+                      : 'bg-blue-100 text-blue-800'
+                  }`}>
+                    {example.platform === 'excel' ? 'Excel' : 'Google Sheets'}
+                  </span>
+                  <span className="text-excel-green text-sm">→ Try Now</span>
+                </div>
               </div>
               
               <p className="text-gray-600 text-sm mb-4">

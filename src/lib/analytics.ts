@@ -10,7 +10,8 @@ import {
   trackPlatformSwitch as gaTrackPlatformSwitch,
   trackConversion as gaTrackConversion,
   trackEngagement as gaTrackEngagement,
-  trackError as gaTrackError
+  trackError as gaTrackError,
+  trackEvent as gaTrackEvent
 } from '@/lib/gtag'
 
 /**
@@ -207,6 +208,38 @@ export function initializeAnalytics(): void {
  */
 export function getInputLength(input: string | null | undefined): number {
   return input?.length || 0
+}
+
+/**
+ * Track when users click on example formulas
+ * @param exampleId - The ID of the clicked example
+ * @param platform - The platform of the example
+ */
+export function trackExampleClick(
+  exampleId: string,
+  platform: Platform
+): void {
+  const properties: AnalyticsEventProperties = {
+    platform,
+    success: true,
+    example_id: exampleId
+  }
+
+  try {
+    // Track in Vercel Analytics
+    track('example_clicked', properties)
+    
+    // Track in Google Analytics 4
+    gaTrackEvent('example_clicked', {
+      event_category: 'User Engagement',
+      event_label: exampleId,
+      platform: platform,
+      example_id: exampleId
+    })
+  } catch (error) {
+    // Fail silently to not affect user experience
+    console.warn('Analytics tracking failed for example_clicked:', error)
+  }
 }
 
 /**

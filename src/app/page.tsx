@@ -12,7 +12,8 @@ import {
   trackFormulaGenerated, 
   initializeAnalytics, 
   createProcessingTimer,
-  getInputLength 
+  getInputLength,
+  trackExampleClick
 } from '@/lib/analytics'
 import {
   createAppError,
@@ -28,6 +29,7 @@ import {
 const FeatureGrid = lazy(() => import('@/components/FeatureGrid'))
 const FAQ = lazy(() => import('@/components/FAQ'))
 const Examples = lazy(() => import('@/components/Examples'))
+const SocialProof = lazy(() => import('@/components/SocialProof'))
 const Footer = lazy(() => import('@/components/Footer'))
 
 // Loading component for lazy-loaded sections
@@ -232,6 +234,10 @@ export default function Home() {
   }
 
   const handleExampleClick = (input: string, platform: Platform) => {
+    // Track example click analytics
+    const exampleId = input.toLowerCase().replace(/[^a-z0-9]/g, '-').substring(0, 20)
+    trackExampleClick(exampleId, platform)
+    
     // Scroll to the generator section
     const generatorElement = document.querySelector('#formula-generator')
     if (generatorElement) {
@@ -313,7 +319,11 @@ export default function Home() {
         
         {/* SEO Content Sections - Lazy loaded for better performance */}
         <Suspense fallback={<SectionSkeleton />}>
-          <Examples />
+          <Examples onExampleClick={handleExampleClick} />
+        </Suspense>
+        
+        <Suspense fallback={<SectionSkeleton />}>
+          <SocialProof />
         </Suspense>
         
         <Suspense fallback={<SectionSkeleton />}>
