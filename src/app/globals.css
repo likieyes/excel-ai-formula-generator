@@ -77,6 +77,14 @@
     color: var(--excel-green);
   }
   
+  .text-excel-green-dark {
+    color: var(--excel-green-dark);
+  }
+  
+  .text-excel-green-light {
+    color: rgba(16, 124, 65, 0.8);
+  }
+  
   .border-excel-green {
     border-color: var(--excel-green);
   }
@@ -85,7 +93,12 @@
     background-color: var(--excel-green);
   }
   
-  .bg-excel-green:hover {
+  .bg-excel-green-dark {
+    background-color: var(--excel-green-dark);
+  }
+  
+  .bg-excel-green:hover,
+  .hover\:bg-excel-green-dark:hover {
     background-color: var(--excel-green-dark);
   }
   
@@ -110,6 +123,21 @@
   /* Optimized focus states */
   .focus-visible-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-excel-green focus-visible:ring-offset-2;
+  }
+  
+  /* Blog-specific utilities */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 

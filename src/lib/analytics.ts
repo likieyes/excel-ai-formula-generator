@@ -243,6 +243,49 @@ export function trackExampleClick(
 }
 
 /**
+ * Track when users spend significant time on the page
+ * @param timeSpent - Time spent in seconds
+ */
+export function trackTimeSpent(timeSpent: number): void {
+  if (timeSpent > 30) { // Only track if user spent more than 30 seconds
+    try {
+      track('time_spent', {
+        duration: timeSpent,
+        engagement_level: timeSpent > 120 ? 'high' : timeSpent > 60 ? 'medium' : 'low'
+      })
+      
+      gaTrackEvent('time_spent', {
+        event_category: 'User Engagement',
+        value: timeSpent,
+        engagement_level: timeSpent > 120 ? 'high' : timeSpent > 60 ? 'medium' : 'low'
+      })
+    } catch (error) {
+      console.warn('Analytics tracking failed for time_spent:', error)
+    }
+  }
+}
+
+/**
+ * Track when users interact with quick-fill tags
+ * @param tagId - The ID of the clicked tag
+ */
+export function trackQuickFillClick(tagId: string): void {
+  try {
+    track('quick_fill_clicked', {
+      tag_id: tagId,
+      success: true
+    })
+    
+    gaTrackEvent('quick_fill_clicked', {
+      event_category: 'User Interaction',
+      event_label: tagId,
+      tag_id: tagId
+    })
+  } catch (error) {
+    console.warn('Analytics tracking failed for quick_fill_clicked:', error)
+  }
+}
+/**
  * Utility function to measure processing time
  * @returns A function that when called returns the elapsed time in milliseconds
  */

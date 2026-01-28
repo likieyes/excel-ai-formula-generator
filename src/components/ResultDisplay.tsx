@@ -169,6 +169,11 @@ function ResultDisplay({
                 {formula}
               </code>
             </pre>
+            {!copySuccess && (
+              <div className="absolute top-2 right-2 bg-excel-green text-white text-xs px-2 py-1 rounded animate-pulse">
+                👆 Click Copy to use this formula
+              </div>
+            )}
           </div>
         </div>
 

@@ -140,3 +140,15 @@ export interface PerformanceMetrics {
     cls?: number // Cumulative Layout Shift
   }
 }
+
+// Blog types
+export interface BlogPost {
+  slug: string
+  title: string
+  date: string
+  excerpt: string
+  content: string
+  author: string
+  tags: string[]
+  readTime: number
+}

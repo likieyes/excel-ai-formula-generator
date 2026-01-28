@@ -24,6 +24,12 @@ export default function Header() {
               Home
             </Link>
             <Link 
+              href="/blog" 
+              className="text-gray-700 hover:text-excel-green transition-colors font-medium"
+            >
+              Blog
+            </Link>
+            <Link 
               href="#examples" 
               className="text-gray-700 hover:text-excel-green transition-colors font-medium"
             >
@@ -47,6 +53,12 @@ export default function Header() {
             className="text-gray-700 hover:text-excel-green transition-colors font-medium"
           >
             Home
+          </Link>
+          <Link 
+            href="/blog" 
+            className="text-gray-700 hover:text-excel-green transition-colors font-medium"
+          >
+            Blog
           </Link>
           <Link 
             href="#examples" 
