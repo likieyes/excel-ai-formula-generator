@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { BLOG_POSTS } from '@/lib/blog-data'
+import { getPublishedFormulas } from '@/lib/formulas-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Main pages
@@ -9,6 +10,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 1,
+    },
+    {
+      url: 'https://www.aiexcelformula.com/formulas',
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
     },
     {
       url: 'https://www.aiexcelformula.com/blog',
@@ -32,5 +39,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...routes, ...blogRoutes]
+  // Formula pages
+  const formulaRoutes = getPublishedFormulas().map((formula) => ({
+    url: `https://www.aiexcelformula.com/formulas/${formula.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }))
+
+  return [...routes, ...blogRoutes, ...formulaRoutes]
 }

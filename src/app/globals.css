@@ -102,6 +102,14 @@
     background-color: var(--excel-green-dark);
   }
   
+  .hover\:bg-excel-green\/90:hover {
+    background-color: rgba(16, 124, 65, 0.9);
+  }
+  
+  .hover\:border-excel-green\/30:hover {
+    border-color: rgba(16, 124, 65, 0.3);
+  }
+  
   .focus\:ring-excel-green:focus {
     --tw-ring-color: var(--excel-green);
   }

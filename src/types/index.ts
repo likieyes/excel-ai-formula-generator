@@ -152,3 +152,16 @@ export interface BlogPost {
   tags: string[]
   readTime: number
 }
+
+// Formula Library types
+export interface FormulaItem {
+  slug: string        // e.g., "extract-email-excel"
+  title: string       // H1 tag
+  description: string // Meta description
+  question: string    // The specific user problem
+  formula: string     // The Excel formula code
+  explanation: string[] // Bullet points explaining the formula
+  difficulty: "Beginner" | "Intermediate" | "Advanced"
+  category: string
+  published: boolean  // Control flag for staged rollout
+}

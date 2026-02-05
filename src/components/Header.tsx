@@ -24,6 +24,12 @@ export default function Header() {
               Home
             </Link>
             <Link 
+              href="/formulas" 
+              className="text-gray-700 hover:text-excel-green transition-colors font-medium"
+            >
+              Formulas
+            </Link>
+            <Link 
               href="/blog" 
               className="text-gray-700 hover:text-excel-green transition-colors font-medium"
             >
@@ -53,6 +59,12 @@ export default function Header() {
             className="text-gray-700 hover:text-excel-green transition-colors font-medium"
           >
             Home
+          </Link>
+          <Link 
+            href="/formulas" 
+            className="text-gray-700 hover:text-excel-green transition-colors font-medium"
+          >
+            Formulas
           </Link>
           <Link 
             href="/blog" 
