@@ -2,258 +2,289 @@ import { FormulaItem } from '@/types'
 
 export const FORMULA_LIBRARY: FormulaItem[] = [
   {
-    slug: 'extract-email-excel',
-    title: 'How to Extract Email Addresses from Text in Excel',
-    description: 'Learn how to extract email addresses from text strings in Excel using powerful formulas. Perfect for cleaning contact lists and data processing.',
-    question: 'How do I extract email addresses from a cell that contains mixed text?',
-    formula: '=MID(A1,FIND("@",A1)-FIND(" ",SUBSTITUTE(A1," ",REPT(" ",100)),ROW(INDIRECT("1:"&LEN(A1)-LEN(SUBSTITUTE(A1," ",""))+1)))+1,FIND(" ",A1&" ",FIND("@",A1))-FIND("@",A1)+FIND("@",A1)-FIND(" ",SUBSTITUTE(A1," ",REPT(" ",100)),ROW(INDIRECT("1:"&LEN(A1)-LEN(SUBSTITUTE(A1," ",""))+1)))-1)',
+    slug: "excel-formula-extract-email-from-text",
+    title: "Excel Formula to Extract Email Address from Text",
+    description: "Learn how to extract email addresses from a text string using TEXTBEFORE and TEXTAFTER functions.",
+    question: "I have a cell containing text and an email address (e.g., 'Contact john@example.com for info'). I want to extract just the email.",
+    formula: "=TEXTBEFORE(TEXTAFTER(A1, \" \"), \" \")",
     explanation: [
-      'Uses FIND function to locate the @ symbol in the text',
-      'SUBSTITUTE and REPT functions help identify word boundaries',
-      'MID function extracts the email address between spaces',
-      'Works with multiple emails in the same cell',
-      'Handles various text formats and spacing'
+      "TEXTAFTER finds the space before the email address.",
+      "TEXTBEFORE stops extracting at the space after the email address.",
+      "Note: This assumes the email is surrounded by spaces. For more complex extraction, Regex is needed."
     ],
-    difficulty: 'Advanced',
-    category: 'Text Processing',
+    difficulty: "Intermediate",
+    category: "Text Manipulation",
     published: true
   },
   {
-    slug: 'calculate-percentage-change',
-    title: 'Calculate Percentage Change Between Two Values in Excel',
-    description: 'Master the percentage change formula in Excel. Learn how to calculate growth rates, decline percentages, and variance analysis.',
-    question: 'How do I calculate the percentage change between two numbers?',
-    formula: '=(New Value - Old Value) / Old Value * 100',
+    slug: "excel-formula-remove-spaces-trim",
+    title: "How to Remove Extra Spaces in Excel",
+    description: "Use the TRIM function to remove leading, trailing, and double spaces from text in Excel.",
+    question: "My data has weird spacing issues (spaces at the start or end). How do I clean it up?",
+    formula: "=TRIM(A1)",
     explanation: [
-      'Subtract the old value from the new value',
-      'Divide the result by the old value',
-      'Multiply by 100 to get the percentage',
-      'Use absolute references when copying the formula',
-      'Format the result as percentage for better readability'
+      "The TRIM function removes all spaces from text except for single spaces between words.",
+      "It is the fastest way to clean copy-pasted data."
     ],
-    difficulty: 'Beginner',
-    category: 'Math & Statistics',
+    difficulty: "Beginner",
+    category: "Text Manipulation",
     published: true
   },
   {
-    slug: 'remove-duplicates-formula',
-    title: 'Remove Duplicates in Excel Using Formulas (Dynamic Method)',
-    description: 'Discover how to remove duplicates in Excel using dynamic formulas. No more manual data cleaning - automate the process.',
-    question: 'How can I remove duplicate values from a list using formulas?',
-    formula: '=UNIQUE(A1:A100)',
+    slug: "excel-formula-count-words-in-cell",
+    title: "Excel Formula to Count Words in a Cell",
+    description: "A clever trick to count the number of words in a cell using LEN and SUBSTITUTE.",
+    question: "I need to know how many words are in a specific sentence in cell A1.",
+    formula: "=LEN(TRIM(A1))-LEN(SUBSTITUTE(A1,\" \",\"\"))+1",
     explanation: [
-      'UNIQUE function automatically removes duplicate values',
-      'Returns only the first occurrence of each value',
-      'Works with both text and numbers',
-      'Updates automatically when source data changes',
-      'Available in Excel 365 and Excel 2021'
+      "First, we calculate the total length of the text.",
+      "Then we remove all spaces and calculate the length again.",
+      "The difference tells us how many spaces there are. Adding 1 gives the word count."
     ],
-    difficulty: 'Intermediate',
-    category: 'Data Cleaning',
+    difficulty: "Intermediate",
+    category: "Text Manipulation",
     published: true
   },
   {
-    slug: 'conditional-sum-multiple-criteria',
-    title: 'Sum with Multiple Conditions in Excel (SUMIFS Formula)',
-    description: 'Learn how to sum values based on multiple criteria using SUMIFS. Perfect for complex data analysis and reporting.',
-    question: 'How do I sum values that meet multiple conditions?',
-    formula: '=SUMIFS(sum_range, criteria_range1, criteria1, criteria_range2, criteria2)',
+    slug: "excel-formula-capitalize-first-letter",
+    title: "How to Capitalize the First Letter of Each Word",
+    description: "Convert text to Proper Case (Title Case) in Excel instantly.",
+    question: "My list of names is all lowercase (e.g., 'john doe'). I want to make them 'John Doe'.",
+    formula: "=PROPER(A1)",
     explanation: [
-      'SUMIFS allows multiple criteria for summing',
-      'First argument is the range to sum',
-      'Following arguments are criteria range and criteria pairs',
-      'Can handle up to 127 criteria pairs',
-      'Supports wildcards and comparison operators'
+      "PROPER capitalizes the first letter of each word and lowercases the rest.",
+      "Useful for cleaning up name lists."
     ],
-    difficulty: 'Intermediate',
-    category: 'Math & Statistics',
+    difficulty: "Beginner",
+    category: "Text Manipulation",
     published: true
   },
   {
-    slug: 'dynamic-dropdown-list',
-    title: 'Create Dynamic Dropdown Lists in Excel (Data Validation)',
-    description: 'Build smart dropdown lists that update automatically. Learn advanced data validation techniques for better data entry.',
-    question: 'How do I create a dropdown list that updates automatically?',
-    formula: '=INDIRECT("Table"&A1&"[Column]")',
+    slug: "excel-formula-extract-first-word",
+    title: "Extract the First Word from a Cell in Excel",
+    description: "Get the first word of a string using LEFT and SEARCH functions.",
+    question: "I want to pull just the first name from a full name string.",
+    formula: "=LEFT(A1, SEARCH(\" \", A1) - 1)",
     explanation: [
-      'INDIRECT function creates dynamic references',
-      'References change based on cell values',
-      'Works with Excel Tables for automatic expansion',
-      'Combines with data validation for dropdowns',
-      'Updates when source data is modified'
+      "SEARCH finds the position of the first space.",
+      "LEFT grabs all characters from the start up to that space."
     ],
-    difficulty: 'Advanced',
-    category: 'Data Validation',
+    difficulty: "Beginner",
+    category: "Text Manipulation",
     published: true
   },
   {
-    slug: 'lookup-multiple-columns',
-    title: 'VLOOKUP with Multiple Columns (Return Multiple Values)',
-    description: 'Master advanced VLOOKUP techniques to return multiple columns of data. Boost your data lookup efficiency.',
-    question: 'How can I return multiple columns of data with one lookup?',
-    formula: '=INDEX(return_array,MATCH(lookup_value,lookup_array,0),{1;2;3})',
+    slug: "excel-formula-extract-last-word",
+    title: "Extract the Last Word from a Text String",
+    description: "How to get the last word (e.g., Last Name) from a cell using TEXTAFTER.",
+    question: "I need to extract the last word from a sentence or name.",
+    formula: "=TEXTAFTER(A1, \" \", -1)",
     explanation: [
-      'INDEX and MATCH combination is more flexible than VLOOKUP',
-      'Array constant {1;2;3} specifies which columns to return',
-      'MATCH finds the row position of the lookup value',
-      'INDEX returns values from multiple columns',
-      'Works in any direction (left or right lookup)'
+      "The -1 argument tells TEXTAFTER to search from the end of the string.",
+      "It grabs everything after the last space found."
     ],
-    difficulty: 'Advanced',
-    category: 'Lookup Functions',
-    published: true
-  },
-  {
-    slug: 'count-cells-with-text',
-    title: 'Count Cells Containing Specific Text in Excel',
-    description: 'Learn multiple methods to count cells containing specific text or partial matches. Essential for data analysis.',
-    question: 'How do I count cells that contain specific text?',
-    formula: '=COUNTIF(range,"*text*")',
-    explanation: [
-      'COUNTIF function counts cells meeting criteria',
-      'Wildcards (*) allow partial text matching',
-      'Case-insensitive by default',
-      'Can count exact matches without wildcards',
-      'Supports multiple criteria with COUNTIFS'
-    ],
-    difficulty: 'Beginner',
-    category: 'Counting Functions',
-    published: true
-  },
-  {
-    slug: 'convert-text-to-date',
-    title: 'Convert Text to Date in Excel (Multiple Methods)',
-    description: 'Transform text strings into proper Excel dates. Handle various date formats and fix date conversion issues.',
-    question: 'How do I convert text that looks like a date into an actual date?',
-    formula: '=DATEVALUE(A1)',
-    explanation: [
-      'DATEVALUE converts text to Excel date serial number',
-      'Works with most common date formats',
-      'Use VALUE function for numbers stored as text',
-      'TEXT function can reformat the result',
-      'Combine with error handling for robust solutions'
-    ],
-    difficulty: 'Intermediate',
-    category: 'Date Functions',
-    published: true
-  },
-  {
-    slug: 'split-text-into-columns',
-    title: 'Split Text into Separate Columns Using Excel Formulas',
-    description: 'Break apart text strings into multiple columns using powerful Excel formulas. No more manual text splitting.',
-    question: 'How can I split text in one cell into multiple columns?',
-    formula: '=TEXTSPLIT(A1," ")',
-    explanation: [
-      'TEXTSPLIT function divides text by delimiter',
-      'Specify delimiter (space, comma, etc.)',
-      'Automatically creates multiple columns',
-      'Available in Excel 365',
-      'Use LEFT, MID, RIGHT for older versions'
-    ],
-    difficulty: 'Intermediate',
-    category: 'Text Processing',
-    published: true
-  },
-  {
-    slug: 'rank-values-excel',
-    title: 'Rank Values in Excel (Handle Ties and Duplicates)',
-    description: 'Learn how to rank data in Excel, handle tied values, and create dynamic rankings that update automatically.',
-    question: 'How do I rank values from highest to lowest in Excel?',
-    formula: '=RANK(value, array, [order])',
-    explanation: [
-      'RANK function assigns position based on value',
-      'Order parameter: 0 for descending, 1 for ascending',
-      'Tied values receive the same rank',
-      'Use RANK.EQ for exact ties, RANK.AVG for average',
-      'Combine with sorting for better visualization'
-    ],
-    difficulty: 'Beginner',
-    category: 'Math & Statistics',
+    difficulty: "Intermediate",
+    category: "Text Manipulation",
     published: false
   },
   {
-    slug: 'nested-if-statements',
-    title: 'Master Nested IF Statements in Excel (Multiple Conditions)',
-    description: 'Build complex logical formulas using nested IF statements. Learn best practices and alternatives for cleaner formulas.',
-    question: 'How do I create IF statements with multiple conditions?',
-    formula: '=IF(condition1, result1, IF(condition2, result2, IF(condition3, result3, default_result)))',
+    slug: "excel-formula-remove-line-breaks",
+    title: "How to Remove Line Breaks in Excel",
+    description: "Clean up your data by removing unwanted line breaks with the CLEAN function.",
+    question: "I copied data from a website and it has weird line breaks inside the cells.",
+    formula: "=CLEAN(A1)",
     explanation: [
-      'Nested IFs allow multiple condition testing',
-      'Each IF can have its own TRUE and FALSE results',
-      'Limit to 7 levels for readability',
-      'Consider IFS function for simpler syntax',
-      'Use AND/OR for complex condition combinations'
+      "The CLEAN function removes all non-printable characters, including line breaks.",
+      "Combine with TRIM for best results: =TRIM(CLEAN(A1))"
     ],
-    difficulty: 'Intermediate',
-    category: 'Logical Functions',
+    difficulty: "Beginner",
+    category: "Text Manipulation",
     published: false
   },
   {
-    slug: 'calculate-working-days',
-    title: 'Calculate Working Days Between Dates (Exclude Weekends)',
-    description: 'Calculate business days between two dates, excluding weekends and holidays. Perfect for project planning.',
-    question: 'How do I calculate working days between two dates?',
-    formula: '=NETWORKDAYS(start_date, end_date, [holidays])',
+    slug: "excel-formula-combine-cells-with-comma",
+    title: "Combine Multiple Cells with a Comma",
+    description: "Join text from multiple cells separated by a delimiter using TEXTJOIN.",
+    question: "I want to combine values from A1, B1, and C1 into one cell, separated by commas.",
+    formula: "=TEXTJOIN(\", \", TRUE, A1:C1)",
     explanation: [
-      'NETWORKDAYS excludes weekends automatically',
-      'Optional holidays parameter for custom exclusions',
-      'Returns the number of working days',
-      'Use NETWORKDAYS.INTL for custom weekend days',
-      'Negative result if start date is after end date'
+      "TEXTJOIN combines a range of cells.",
+      "The first argument is the delimiter (comma and space).",
+      "TRUE tells Excel to ignore empty cells."
     ],
-    difficulty: 'Intermediate',
-    category: 'Date Functions',
+    difficulty: "Intermediate",
+    category: "Text Manipulation",
     published: false
   },
   {
-    slug: 'find-last-occurrence',
-    title: 'Find Last Occurrence of Text in Excel Cell',
-    description: 'Locate the last occurrence of specific text or character in a cell. Essential for advanced text processing.',
-    question: 'How do I find the position of the last occurrence of a character?',
-    formula: '=FIND("~",SUBSTITUTE(A1,char,REPT("~",100)),1)',
+    slug: "excel-formula-extract-domain-from-url",
+    title: "Extract Domain Name from URL in Excel",
+    description: "Parse URLs to get just the domain name (e.g., google.com) using text functions.",
+    question: "I have a list of full URLs (https://www.google.com/search). I just want 'google.com'.",
+    formula: "=TEXTBEFORE(TEXTAFTER(A1, \"//\"), \"/\")",
     explanation: [
-      'SUBSTITUTE replaces the last occurrence with tildes',
-      'REPT creates a long string of tildes',
-      'FIND locates the position of the tilde string',
-      'Works with any character or text string',
-      'Useful for extracting file extensions or names'
+      "First, TEXTAFTER removes the 'https://' part.",
+      "Then, TEXTBEFORE stops at the next '/' to isolate the domain."
     ],
-    difficulty: 'Advanced',
-    category: 'Text Processing',
+    difficulty: "Intermediate",
+    category: "Text Manipulation",
     published: false
   },
   {
-    slug: 'conditional-formatting-formulas',
-    title: 'Advanced Conditional Formatting with Custom Formulas',
-    description: 'Create dynamic conditional formatting rules using custom formulas. Highlight data based on complex criteria.',
-    question: 'How do I create conditional formatting with custom conditions?',
-    formula: '=AND($B2>100,$C2<50)',
+    slug: "excel-formula-check-if-cell-contains-text",
+    title: "Check If Cell Contains Specific Text (Case Insensitive)",
+    description: "Return TRUE or FALSE if a cell contains a specific substring.",
+    question: "I want to flag rows that contain the word 'Error' anywhere in the text.",
+    formula: "=ISNUMBER(SEARCH(\"Error\", A1))",
     explanation: [
-      'Custom formulas enable complex formatting rules',
-      'Use absolute and relative references correctly',
-      'AND/OR functions combine multiple conditions',
-      'Formula must return TRUE/FALSE',
-      'Apply to entire ranges for consistent formatting'
+      "SEARCH looks for 'Error' and returns a position number (case-insensitive).",
+      "ISNUMBER returns TRUE if a number is found, and FALSE if not."
     ],
-    difficulty: 'Advanced',
-    category: 'Formatting',
+    difficulty: "Intermediate",
+    category: "Text Manipulation",
     published: false
   },
   {
-    slug: 'generate-random-data',
-    title: 'Generate Random Data in Excel (Numbers, Text, Dates)',
-    description: 'Create random sample data for testing and analysis. Learn various random generation techniques in Excel.',
-    question: 'How do I generate random sample data in Excel?',
-    formula: '=RANDBETWEEN(1,100)',
+    slug: "excel-formula-split-text-to-rows",
+    title: "Split Text by Delimiter into New Rows",
+    description: "Advanced formula to split comma-separated values into separate rows.",
+    question: "I have 'Apple, Banana, Orange' in one cell. I want them in 3 separate rows.",
+    formula: "=TEXTSPLIT(A1, , \", \")",
     explanation: [
-      'RANDBETWEEN generates random integers in range',
-      'RAND() creates decimal numbers between 0 and 1',
-      'Combine with other functions for complex data',
-      'Use RANDARRAY for multiple random values',
-      'Press F9 to recalculate random values'
+      "TEXTSPLIT breaks text into an array.",
+      "Leaving the column delimiter empty and setting the row delimiter to comma puts items in new rows."
     ],
-    difficulty: 'Beginner',
-    category: 'Math & Statistics',
+    difficulty: "Advanced",
+    category: "Text Manipulation",
+    published: false
+  },
+  {
+    slug: "excel-formula-remove-first-character",
+    title: "Remove the First Character from a String",
+    description: "How to delete the first letter or symbol from a cell.",
+    question: "My data has a leading symbol (like '#102'). I want to remove the '#'.",
+    formula: "=RIGHT(A1, LEN(A1)-1)",
+    explanation: [
+      "We calculate the total length of the string.",
+      "We subtract 1 to exclude the first character.",
+      "RIGHT extracts the remaining characters from the end."
+    ],
+    difficulty: "Beginner",
+    category: "Text Manipulation",
+    published: false
+  },
+  {
+    slug: "excel-formula-remove-last-character",
+    title: "Remove the Last Character from a String",
+    description: "Delete the last character of a text string using LEFT and LEN.",
+    question: "I want to remove the last digit from a serial number.",
+    formula: "=LEFT(A1, LEN(A1)-1)",
+    explanation: [
+      "Identify the total length of the text.",
+      "Subtract 1 from the length.",
+      "Use LEFT to grab everything except that last character."
+    ],
+    difficulty: "Beginner",
+    category: "Text Manipulation",
+    published: false
+  },
+  {
+    slug: "excel-formula-pad-numbers-with-zeros",
+    title: "Pad Numbers with Leading Zeros",
+    description: "Convert numbers like '5' into '005' using the TEXT function.",
+    question: "My product IDs need to be 3 digits long (e.g., 001, 010).",
+    formula: "=TEXT(A1, \"000\")",
+    explanation: [
+      "The TEXT function converts a number to text.",
+      "The string \"000\" forces the format to always show at least 3 digits."
+    ],
+    difficulty: "Beginner",
+    category: "Text Manipulation",
+    published: false
+  },
+  {
+    slug: "excel-formula-extract-text-between-parentheses",
+    title: "Extract Text Between Parentheses",
+    description: "Get the text inside brackets () using TEXTBETWEEN.",
+    question: "I want to get the SKU code from 'Product Name (SKU123)'.",
+    formula: "=TEXTBETWEEN(A1, \"(\", \")\")",
+    explanation: [
+      "TEXTBETWEEN extracts everything between the two specified delimiters.",
+      "Much simpler than the old FIND/MID method."
+    ],
+    difficulty: "Intermediate",
+    category: "Text Manipulation",
+    published: false
+  },
+  {
+    slug: "excel-formula-convert-text-to-date",
+    title: "Convert Text String to Date Format",
+    description: "Fix dates stored as text (e.g., '2023.12.25') using DATEVALUE.",
+    question: "My dates are not recognized by Excel. They are just text strings.",
+    formula: "=DATEVALUE(SUBSTITUTE(A1, \".\", \"/\"))",
+    explanation: [
+      "First, SUBSTITUTE changes dots to slashes so Excel recognizes the format.",
+      "DATEVALUE converts that string into a proper Excel serial date number."
+    ],
+    difficulty: "Intermediate",
+    category: "Text Manipulation",
+    published: false
+  },
+  {
+    slug: "excel-formula-replace-text-partial",
+    title: "Replace Part of a Text String",
+    description: "Swap out specific words or characters using SUBSTITUTE.",
+    question: "I need to change all instances of 'OldCompany' to 'NewCompany' in a column.",
+    formula: "=SUBSTITUTE(A1, \"OldCompany\", \"NewCompany\")",
+    explanation: [
+      "SUBSTITUTE searches for specific text and replaces it with new text.",
+      "It is case-sensitive."
+    ],
+    difficulty: "Beginner",
+    category: "Text Manipulation",
+    published: false
+  },
+  {
+    slug: "excel-formula-repeat-text",
+    title: "Repeat Text Multiple Times",
+    description: "Create visual bars or repeated patterns using REPT.",
+    question: "I want to create a simple in-cell bar chart by repeating the pipe symbol '|'.",
+    formula: "=REPT(\"|\", B1)",
+    explanation: [
+      "REPT repeats a string a specified number of times.",
+      "If B1 contains 5, you get '|||||'."
+    ],
+    difficulty: "Beginner",
+    category: "Text Manipulation",
+    published: false
+  },
+  {
+    slug: "excel-formula-count-specific-character",
+    title: "Count Occurrences of a Specific Character",
+    description: "Count how many times a symbol appears in a cell.",
+    question: "I want to count how many commas are in a cell.",
+    formula: "=LEN(A1)-LEN(SUBSTITUTE(A1,\",\",\"\"))",
+    explanation: [
+      "Compare the length of the original string vs. the string with commas removed.",
+      "The difference equals the number of commas."
+    ],
+    difficulty: "Advanced",
+    category: "Text Manipulation",
+    published: false
+  },
+  {
+    slug: "excel-formula-generate-random-password",
+    title: "Generate Random Alphanumeric String",
+    description: "Create random codes or passwords using modern Excel functions.",
+    question: "I need a random 6-character code for user IDs.",
+    formula: "=TEXTJOIN(\"\",,CHAR(RANDARRAY(6,,65,90,TRUE)))",
+    explanation: [
+      "RANDARRAY generates 6 random numbers between 65 and 90 (ASCII for A-Z).",
+      "CHAR converts numbers to letters.",
+      "TEXTJOIN combines them into one string."
+    ],
+    difficulty: "Advanced",
+    category: "Text Manipulation",
     published: false
   }
 ]
