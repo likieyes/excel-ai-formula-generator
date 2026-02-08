@@ -85,7 +85,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Intermediate",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-remove-line-breaks",
@@ -99,7 +99,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Beginner",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-combine-cells-with-comma",
@@ -114,7 +114,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Intermediate",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-extract-domain-from-url",
@@ -128,7 +128,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Intermediate",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-check-if-cell-contains-text",
@@ -142,7 +142,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Intermediate",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-split-text-to-rows",
