@@ -156,7 +156,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Advanced",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-remove-first-character",
@@ -171,7 +171,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Beginner",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-remove-last-character",
@@ -186,7 +186,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Beginner",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-pad-numbers-with-zeros",
@@ -200,7 +200,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Beginner",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-extract-text-between-parentheses",
@@ -214,7 +214,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Intermediate",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-convert-text-to-date",
@@ -228,7 +228,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Intermediate",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-replace-text-partial",
@@ -242,7 +242,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Beginner",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-repeat-text",
@@ -256,7 +256,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Beginner",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-count-specific-character",
@@ -270,7 +270,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Advanced",
     category: "Text Manipulation",
-    published: false
+    published: true
   },
   {
     slug: "excel-formula-generate-random-password",
@@ -285,7 +285,7 @@ export const FORMULA_LIBRARY: FormulaItem[] = [
     ],
     difficulty: "Advanced",
     category: "Text Manipulation",
-    published: false
+    published: true
   }
 ]
 
