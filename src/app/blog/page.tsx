@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'Excel & Google Sheets Blog - Tips, Tutorials & Guides | AI Excel Formula',
   description: 'Learn Excel and Google Sheets with our comprehensive tutorials, tips, and guides. Master formulas, pivot tables, data analysis, and productivity techniques.',
   keywords: ['Excel blog', 'Google Sheets tutorials', 'spreadsheet tips', 'Excel formulas', 'data analysis'],
+  alternates: {
+    canonical: 'https://www.aiexcelformula.com/blog',
+  },
   openGraph: {
     title: 'Excel & Google Sheets Blog - Expert Tips and Tutorials',
     description: 'Master Excel and Google Sheets with our expert tutorials and guides',
@@ -16,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   // Sort posts by date (newest first)
-  const sortedPosts = [...BLOG_POSTS].sort((a, b) => 
+  const sortedPosts = [...BLOG_POSTS].sort((a, b) =>
     new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 
@@ -30,7 +33,7 @@ export default function BlogPage() {
               Excel & Google Sheets Blog
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Master spreadsheets with our expert tutorials, tips, and guides. 
+              Master spreadsheets with our expert tutorials, tips, and guides.
               From basic formulas to advanced data analysis techniques.
             </p>
           </div>
@@ -61,7 +64,7 @@ export default function BlogPage() {
 
                   {/* Title */}
                   <h2 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                    <Link 
+                    <Link
                       href={`/blog/${post.slug}`}
                       className="hover:text-excel-green transition-colors"
                     >
@@ -116,7 +119,7 @@ export default function BlogPage() {
             Ready to Create Your Own Formulas?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Stop struggling with complex syntax. Describe what you need in plain English 
+            Stop struggling with complex syntax. Describe what you need in plain English
             and get perfect Excel formulas instantly.
           </p>
           <Link

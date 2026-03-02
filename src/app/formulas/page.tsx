@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'Excel Formula Library - Ready-to-Use Solutions | AI Excel Formula',
   description: 'Browse our comprehensive library of Excel formulas with step-by-step explanations. Find solutions for data analysis, text processing, and more.',
   keywords: ['excel formulas', 'formula library', 'excel solutions', 'spreadsheet formulas'],
+  alternates: {
+    canonical: 'https://www.aiexcelformula.com/formulas',
+  },
   openGraph: {
     title: 'Excel Formula Library - Ready-to-Use Solutions',
     description: 'Browse our comprehensive library of Excel formulas with step-by-step explanations.',
@@ -42,7 +45,7 @@ export default function FormulasPage() {
               Excel Formula Library
             </h1>
             <p className="text-xl text-gray-600 mb-6">
-              Ready-to-use Excel formulas with step-by-step explanations. 
+              Ready-to-use Excel formulas with step-by-step explanations.
               Copy, paste, and customize for your needs.
             </p>
             <div className="bg-excel-green/10 border border-excel-green/20 rounded-lg p-4">
@@ -108,8 +111,8 @@ export default function FormulasPage() {
                     </p>
                     <div className="bg-gray-50 rounded p-3 mb-4">
                       <code className="text-sm text-gray-800 font-mono break-all">
-                        {formula.formula.length > 60 
-                          ? `${formula.formula.substring(0, 60)}...` 
+                        {formula.formula.length > 60
+                          ? `${formula.formula.substring(0, 60)}...`
                           : formula.formula
                         }
                       </code>
@@ -134,7 +137,7 @@ export default function FormulasPage() {
               Need a Custom Formula?
             </h2>
             <p className="text-excel-green-light mb-6 max-w-2xl mx-auto">
-              Can&apos;t find what you&apos;re looking for? Our AI-powered formula generator 
+              Can&apos;t find what you&apos;re looking for? Our AI-powered formula generator
               can create custom Excel formulas based on your specific needs.
             </p>
             <Link

@@ -23,12 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
-    {
-      url: 'https://www.aiexcelformula.com/#examples',
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    },
+
   ]
 
   // Blog posts

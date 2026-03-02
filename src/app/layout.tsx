@@ -5,7 +5,7 @@ import { Analytics } from '@vercel/analytics/react'
 import StructuredData from '@/components/StructuredData'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
@@ -53,9 +53,8 @@ export const metadata: Metadata = {
     creator: '@aiexcelformula',
     images: ['https://www.aiexcelformula.com/og-image.png'],
   },
-  alternates: {
-    canonical: 'https://www.aiexcelformula.com',
-  },
+  // NOTE: canonical URL is NOT set here in the global layout.
+  // Each page sets its own canonical to avoid all subpages pointing to homepage.
   category: 'Business Tools',
   classification: 'Business Application',
   other: {
