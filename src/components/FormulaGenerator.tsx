@@ -1,12 +1,13 @@
 'use client'
 
 import { useState, useCallback, memo } from 'react'
-import { Platform, QuickFillTag } from '@/types'
+import { Platform, QuickFillTag, GenerateTask } from '@/types'
 import { trackPlatformToggle } from '@/lib/analytics'
 
 interface FormulaGeneratorProps {
   onGenerate: (input: string, platform: Platform) => void
   isLoading: boolean
+  task?: GenerateTask
 }
 
 // Quick-fill tags for common formula types
@@ -32,12 +33,12 @@ const QUICK_FILL_TAGS: QuickFillTag[] = [
 ]
 
 // Memoized platform tab component for better performance
-const PlatformTab = memo(({ 
-  platform, 
-  isSelected, 
-  onClick, 
-  children 
-}: { 
+const PlatformTab = memo(({
+  platform,
+  isSelected,
+  onClick,
+  children
+}: {
   platform: Platform
   isSelected: boolean
   onClick: (platform: Platform) => void
@@ -45,11 +46,10 @@ const PlatformTab = memo(({
 }) => (
   <button
     onClick={() => onClick(platform)}
-    className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors transform-gpu ${
-      isSelected
+    className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors transform-gpu ${isSelected
         ? 'border-excel-green text-excel-green bg-green-50'
         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-    }`}
+      }`}
     data-testid={`${platform}-tab`}
     aria-selected={isSelected}
     role="tab"
@@ -61,10 +61,10 @@ const PlatformTab = memo(({
 PlatformTab.displayName = 'PlatformTab'
 
 // Memoized quick-fill tag component
-const QuickFillTagButton = memo(({ 
-  tag, 
-  onClick 
-}: { 
+const QuickFillTagButton = memo(({
+  tag,
+  onClick
+}: {
   tag: QuickFillTag
   onClick: (tag: QuickFillTag) => void
 }) => (
@@ -80,14 +80,14 @@ const QuickFillTagButton = memo(({
 
 QuickFillTagButton.displayName = 'QuickFillTagButton'
 
-function FormulaGenerator({ onGenerate, isLoading }: FormulaGeneratorProps) {
+function FormulaGenerator({ onGenerate, isLoading, task = 'formula' }: FormulaGeneratorProps) {
   const [selectedPlatform, setSelectedPlatform] = useState<Platform>('excel')
   const [inputText, setInputText] = useState('')
 
   const handlePlatformChange = useCallback((platform: Platform) => {
     const previousPlatform = selectedPlatform
     setSelectedPlatform(platform)
-    
+
     // Track platform toggle analytics
     if (previousPlatform !== platform) {
       trackPlatformToggle(previousPlatform, platform)
@@ -109,6 +109,31 @@ function FormulaGenerator({ onGenerate, isLoading }: FormulaGeneratorProps) {
   }, [])
 
   const isGenerateDisabled = !inputText.trim() || isLoading
+
+  const getLabels = () => {
+    switch (task) {
+      case 'vba':
+        return {
+          label: 'Describe what you want to automate:',
+          placeholder: 'e.g., Delete all rows that contain the word "Cancelled"...',
+          button: 'Generate VBA Script ⚡'
+        }
+      case 'explain':
+        return {
+          label: 'Paste the formula you want to understand:',
+          placeholder: 'e.g., =INDEX(A:A,MATCH(MAX(B:B),B:B,0))...',
+          button: 'Explain Formula 🔍'
+        }
+      default:
+        return {
+          label: 'Describe what you want to calculate:',
+          placeholder: 'e.g., Calculate row total if category is "Sales"...',
+          button: 'Generate Formula ✨'
+        }
+    }
+  }
+
+  const labels = getLabels()
 
   return (
     <div id="formula-generator" className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg border border-gray-200 p-6">
@@ -135,13 +160,13 @@ function FormulaGenerator({ onGenerate, isLoading }: FormulaGeneratorProps) {
       {/* Input Area */}
       <div className="mb-6">
         <label htmlFor="formula-input" className="block text-sm font-medium text-gray-700 mb-2">
-          Describe what you want to calculate:
+          {labels.label}
         </label>
         <textarea
           id="formula-input"
           value={inputText}
           onChange={handleInputChange}
-          placeholder="e.g., Calculate the difference between Date A and Date B, excluding weekends..."
+          placeholder={labels.placeholder}
           className="w-full h-32 px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-excel-green focus:border-transparent resize-none text-gray-900 placeholder-gray-500 focus-visible-ring"
           data-testid="formula-input"
           aria-describedby="input-help"
@@ -151,29 +176,30 @@ function FormulaGenerator({ onGenerate, isLoading }: FormulaGeneratorProps) {
         </div>
       </div>
 
-      {/* Quick-Fill Tags */}
-      <div className="mb-6">
-        <p className="text-sm font-medium text-gray-700 mb-3">Quick examples:</p>
-        <div className="flex flex-wrap gap-2">
-          {QUICK_FILL_TAGS.map((tag) => (
-            <QuickFillTagButton
-              key={tag.id}
-              tag={tag}
-              onClick={handleQuickFillClick}
-            />
-          ))}
+      {/* Quick-Fill Tags - Only show for formula task */}
+      {task === 'formula' && (
+        <div className="mb-6">
+          <p className="text-sm font-medium text-gray-700 mb-3">Quick examples:</p>
+          <div className="flex flex-wrap gap-2">
+            {QUICK_FILL_TAGS.map((tag) => (
+              <QuickFillTagButton
+                key={tag.id}
+                tag={tag}
+                onClick={handleQuickFillClick}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Generate Button */}
       <button
         onClick={handleGenerate}
         disabled={isGenerateDisabled}
-        className={`w-full py-4 px-6 text-white font-semibold text-lg rounded-md transition-all duration-200 transform-gpu focus-visible-ring ${
-          isGenerateDisabled
+        className={`w-full py-4 px-6 text-white font-semibold text-lg rounded-md transition-all duration-200 transform-gpu focus-visible-ring ${isGenerateDisabled
             ? 'bg-gray-400 cursor-not-allowed'
             : 'bg-excel-green hover:bg-excel-green-dark shadow-lg hover:shadow-xl hover:-translate-y-0.5'
-        }`}
+          }`}
         data-testid="generate-button"
         type="button"
         aria-describedby="generate-help"
@@ -184,7 +210,7 @@ function FormulaGenerator({ onGenerate, isLoading }: FormulaGeneratorProps) {
             <span>Generating...</span>
           </div>
         ) : (
-          'Generate Formula ✨'
+          labels.button
         )}
       </button>
       <div id="generate-help" className="sr-only">

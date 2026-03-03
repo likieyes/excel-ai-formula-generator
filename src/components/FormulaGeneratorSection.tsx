@@ -5,7 +5,7 @@ import FormulaGenerator from '@/components/FormulaGenerator'
 import ResultDisplay from '@/components/ResultDisplay'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import ErrorDisplay from '@/components/ErrorDisplay'
-import { Platform, GenerateFormulaRequest, GenerateFormulaResponse, AppError } from '@/types'
+import { Platform, GenerateFormulaRequest, GenerateFormulaResponse, AppError, GenerateTask } from '@/types'
 import {
     trackFormulaGenerated,
     initializeAnalytics,
@@ -23,7 +23,11 @@ import {
     isAIErrorResponse
 } from '@/lib/errorHandling'
 
-export default function FormulaGeneratorSection() {
+interface FormulaGeneratorSectionProps {
+    task?: GenerateTask
+}
+
+export default function FormulaGeneratorSection({ task = 'formula' }: FormulaGeneratorSectionProps) {
     const [isLoading, setIsLoading] = useState(false)
     const [currentResult, setCurrentResult] = useState<{
         formula: string
@@ -73,7 +77,8 @@ export default function FormulaGeneratorSection() {
             const result = await retryManager.executeWithRetry(async () => {
                 const requestBody: GenerateFormulaRequest = {
                     input: input.trim(),
-                    platform
+                    platform,
+                    task
                 }
 
                 const response = await fetch('/api/generate-formula', {
@@ -224,6 +229,7 @@ export default function FormulaGeneratorSection() {
                     <FormulaGenerator
                         onGenerate={handleGenerate}
                         isLoading={isLoading}
+                        task={task}
                     />
                 </ErrorBoundary>
 
@@ -252,6 +258,7 @@ export default function FormulaGeneratorSection() {
                         isVisible={!!currentResult}
                         onCopy={handleCopy}
                         platform={selectedPlatform}
+                        task={task}
                     />
                 </ErrorBoundary>
             </div>

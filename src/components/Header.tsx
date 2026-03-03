@@ -16,30 +16,30 @@ export default function Header() {
           </div>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
-            <Link 
-              href="/" 
-              className="text-gray-700 hover:text-excel-green transition-colors font-medium"
+          <nav className="hidden lg:flex items-center space-x-6">
+            <Link
+              href="/"
+              className="text-gray-700 hover:text-excel-green transition-colors font-medium border-b-2 border-transparent hover:border-excel-green py-1"
             >
               Home
             </Link>
-            <Link 
-              href="/formulas" 
-              className="text-gray-700 hover:text-excel-green transition-colors font-medium"
+            <Link
+              href="/formulas"
+              className="text-gray-700 hover:text-excel-green transition-colors font-medium border-b-2 border-transparent hover:border-excel-green py-1"
             >
               Formulas
             </Link>
-            <Link 
-              href="/blog" 
-              className="text-gray-700 hover:text-excel-green transition-colors font-medium"
+            <Link
+              href="/formula-explainer"
+              className="text-gray-700 hover:text-excel-green transition-colors font-medium border-b-2 border-transparent hover:border-excel-green py-1"
+            >
+              Explainer
+            </Link>
+            <Link
+              href="/blog"
+              className="text-gray-700 hover:text-excel-green transition-colors font-medium border-b-2 border-transparent hover:border-excel-green py-1"
             >
               Blog
-            </Link>
-            <Link 
-              href="#examples" 
-              className="text-gray-700 hover:text-excel-green transition-colors font-medium"
-            >
-              Examples
             </Link>
           </nav>
 
@@ -52,32 +52,14 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        <nav className="md:hidden mt-4 flex items-center justify-center space-x-6">
-          <Link 
-            href="/" 
-            className="text-gray-700 hover:text-excel-green transition-colors font-medium"
-          >
-            Home
-          </Link>
-          <Link 
-            href="/formulas" 
-            className="text-gray-700 hover:text-excel-green transition-colors font-medium"
-          >
-            Formulas
-          </Link>
-          <Link 
-            href="/blog" 
-            className="text-gray-700 hover:text-excel-green transition-colors font-medium"
-          >
-            Blog
-          </Link>
-          <Link 
-            href="#examples" 
-            className="text-gray-700 hover:text-excel-green transition-colors font-medium"
-          >
-            Examples
-          </Link>
+        {/* Mobile Navigation - Scrollable on small screens */}
+        <nav className="lg:hidden mt-4 overflow-x-auto no-scrollbar border-t pt-4">
+          <div className="flex items-center justify-between min-w-max space-x-6 px-2 text-sm">
+            <Link href="/" className="text-gray-700 font-medium">Home</Link>
+            <Link href="/formulas" className="text-gray-700 font-medium whitespace-nowrap">Formulas</Link>
+            <Link href="/formula-explainer" className="text-gray-700 font-medium whitespace-nowrap">Explainer</Link>
+            <Link href="/blog" className="text-gray-700 font-medium">Blog</Link>
+          </div>
         </nav>
       </div>
     </header>

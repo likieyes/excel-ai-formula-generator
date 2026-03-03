@@ -1,7 +1,8 @@
 // Core data models for Excel AI Formula Generator
 
-// Platform types
+// Platform and Task types
 export type Platform = 'excel' | 'google-sheets'
+export type GenerateTask = 'formula' | 'vba' | 'explain'
 
 // Formula Request Model
 export interface FormulaRequest {
@@ -27,6 +28,7 @@ export interface FormulaResponse {
 export interface GenerateFormulaRequest {
   input: string
   platform: Platform
+  task?: GenerateTask
 }
 
 export interface GenerateFormulaResponse {

@@ -10,12 +10,11 @@ export const ERROR_MESSAGES: Record<ErrorType, string> = {
 
 // Specific error patterns for AI service responses
 const AI_ERROR_PATTERNS = [
-  'error',
-  'not spreadsheet',
-  'cannot generate',
-  'not related to',
-  'unable to create',
-  'invalid request'
+  'i cannot fulfill this request',
+  'not a spreadsheet calculation',
+  'not related to spreadsheets',
+  'unable to generate a formula for this',
+  'invalid spreadsheet request'
 ]
 
 /**
@@ -42,7 +41,7 @@ export function categorizeError(error: any): ErrorType {
   if (error instanceof TypeError && error.message.includes('fetch')) {
     return 'network_error'
   }
-  
+
   if (error.name === 'NetworkError' || error.code === 'NETWORK_ERROR') {
     return 'network_error'
   }
@@ -155,7 +154,7 @@ export class RetryManager {
       this.retryCount++
 
       // Check if we should retry
-      const shouldRetry = this.retryCount <= this.maxRetries && 
+      const shouldRetry = this.retryCount <= this.maxRetries &&
         (errorHandler ? errorHandler(error, this.retryCount) : this.shouldRetryError(error))
 
       if (shouldRetry) {

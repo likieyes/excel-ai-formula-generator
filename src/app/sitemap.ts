@@ -18,12 +18,41 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: 'https://www.aiexcelformula.com/formula-explainer',
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
       url: 'https://www.aiexcelformula.com/blog',
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
-
+    {
+      url: 'https://www.aiexcelformula.com/guide',
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: 'https://www.aiexcelformula.com/contact',
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    },
+    {
+      url: 'https://www.aiexcelformula.com/privacy',
+      lastModified: new Date(),
+      changeFrequency: 'yearly' as const,
+      priority: 0.3,
+    },
+    {
+      url: 'https://www.aiexcelformula.com/terms',
+      lastModified: new Date(),
+      changeFrequency: 'yearly' as const,
+      priority: 0.3,
+    },
   ]
 
   // Blog posts
