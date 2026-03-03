@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { getPublishedFormulas, getCategories } from '@/lib/formulas-data'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Excel Formula Library - Ready-to-Use Solutions | AI Excel Formula',
@@ -36,8 +38,9 @@ export default function FormulasPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <Header />
+      {/* Header Banner */}
       <div className="bg-white border-b">
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto text-center">
@@ -149,6 +152,7 @@ export default function FormulasPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

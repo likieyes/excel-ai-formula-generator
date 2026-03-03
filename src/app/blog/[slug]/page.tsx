@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { BLOG_POSTS } from '@/lib/blog-data'
 import { BlogPost } from '@/types'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 interface BlogPostPageProps {
   params: {
@@ -122,7 +124,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white flex flex-col">
+        <Header />
         {/* Breadcrumbs */}
         <div className="bg-gray-50 border-b border-gray-200">
           <div className="container mx-auto px-4 py-4">
@@ -258,6 +261,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </>
   )

@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import { getPublishedFormulas } from '@/lib/formulas-data'
 import { FormulaItem } from '@/types'
 import CopyButton from '@/components/CopyButton'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 interface Props {
   params: { slug: string }
@@ -124,7 +126,8 @@ export default function FormulaDetailPage({ params }: Props) {
           }),
         }}
       />
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        <Header />
         {/* Breadcrumbs */}
         <div className="bg-white border-b">
           <div className="container mx-auto px-4 py-4">
@@ -290,6 +293,7 @@ export default function FormulaDetailPage({ params }: Props) {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </>
   )

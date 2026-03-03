@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { BLOG_POSTS } from '@/lib/blog-data'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Excel & Google Sheets Blog - Tips, Tutorials & Guides | AI Excel Formula',
@@ -24,8 +26,9 @@ export default function BlogPage() {
   )
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <Header />
+      {/* Header Banner */}
       <div className="bg-white border-b border-gray-200">
         <div className="container mx-auto px-4 py-12">
           <div className="max-w-4xl mx-auto text-center">
@@ -130,6 +133,7 @@ export default function BlogPage() {
           </Link>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
