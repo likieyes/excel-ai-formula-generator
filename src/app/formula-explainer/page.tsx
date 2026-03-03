@@ -39,7 +39,7 @@ export default function ExplainerPage() {
                             <div>
                                 <div className="text-excel-green text-3xl font-bold mb-2">01</div>
                                 <h3 className="font-bold mb-2">Learn Faster</h3>
-                                <p className="text-gray-600 text-sm line-clamp-2">Understand the "why" behind every function and nesting level.</p>
+                                <p className="text-gray-600 text-sm line-clamp-2">Understand the &quot;why&quot; behind every function and nesting level.</p>
                             </div>
                             <div>
                                 <div className="text-excel-green text-3xl font-bold mb-2">02</div>

@@ -58,15 +58,15 @@ export default function GuidePage() {
                             <ul className="space-y-4 text-gray-700">
                                 <li className="flex gap-3">
                                     <span className="text-excel-green font-bold">✓</span>
-                                    <span><strong>Be Specific:</strong> Mention cell ranges like A1:A10 instead of just "the column".</span>
+                                    <span><strong>Be Specific:</strong> Mention cell ranges like A1:A10 instead of just &quot;the column&quot;.</span>
                                 </li>
                                 <li className="flex gap-3">
                                     <span className="text-excel-green font-bold">✓</span>
-                                    <span><strong>Mention Conditions:</strong> Use words like "if", "and", "but not" to define logic clearly.</span>
+                                    <span><strong>Mention Conditions:</strong> Use words like &quot;if&quot;, &quot;and&quot;, &quot;but not&quot; to define logic clearly.</span>
                                 </li>
                                 <li className="flex gap-3">
                                     <span className="text-excel-green font-bold">✓</span>
-                                    <span><strong>Reference Results:</strong> If the output isn&apos;t perfect, try rephrasing with different keywords like "VLOOKUP" or "lookup".</span>
+                                    <span><strong>Reference Results:</strong> If the output isn&apos;t perfect, try rephrasing with different keywords like &quot;VLOOKUP&quot; or &quot;lookup&quot;.</span>
                                 </li>
                             </ul>
                         </section>

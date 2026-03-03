@@ -29,7 +29,7 @@ export default function TermsPage() {
                     </section>
                     <section>
                         <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Limitation of Liability</h2>
-                        <p>AI Excel Formula is provided "as is" without warranties. We are not liable for any data loss, financial loss, or errors resulting from the use of generated formulas.</p>
+                        <p>AI Excel Formula is provided &quot;as is&quot; without warranties. We are not liable for any data loss, financial loss, or errors resulting from the use of generated formulas.</p>
                     </section>
                     <section>
                         <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Changes to Terms</h2>
